@@ -8,7 +8,7 @@
 using namespace std;
 
 // constants
-const int N = 100;
+const int N = 10000;
 const int range = 10;
 const int minSleepDuration = 1;
 const int maxSleepDuration = 100;
@@ -29,7 +29,7 @@ void producer(int id)
     for (int i = 0; i < N; i++)
     {
         buffer.push(rand() % range + 1);
-        this_thread::sleep_for(chrono::milliseconds(minSleepDuration + rand() % (maxSleepDuration - minSleepDuration + 1)));
+        // this_thread::sleep_for(chrono::milliseconds(rand() % (maxSleepDuration - minSleepDuration + 1) + minSleepDuration));
     }
 }
 
@@ -45,7 +45,7 @@ void consumer(int id)
         {
             sum += buffer.top();
             buffer.pop();
-            this_thread::sleep_for(chrono::milliseconds(minSleepDuration + rand() % (maxSleepDuration - minSleepDuration + 1)));
+            // this_thread::sleep_for(chrono::milliseconds(rand() % (maxSleepDuration - minSleepDuration + 1) + minSleepDuration));
         }
     }
 }
