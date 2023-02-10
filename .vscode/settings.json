@@ -1,6 +1,29 @@
 {
   "files.associations": {
     "thread": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "random": "cpp",
+    "iosfwd": "cpp",
+    "functional": "cpp",
+    "chrono": "cpp",
+    "bit": "cpp",
+    "*.tcc": "cpp",
+    "cstdlib": "cpp",
+    "string": "cpp",
+    "exception": "cpp",
+    "memory_resource": "cpp",
+    "cmath": "cpp",
+    "iostream": "cpp",
+    "istream": "cpp",
+    "mutex": "cpp",
+    "new": "cpp",
+    "numeric": "cpp",
+    "ratio": "cpp",
+    "stop_token": "cpp",
+    "string_view": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "typeinfo": "cpp",
+    "utility": "cpp"
   }
 }
