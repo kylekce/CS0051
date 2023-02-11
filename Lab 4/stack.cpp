@@ -1,3 +1,6 @@
+// sleep_for function has been disabled/commented out due to a long runtime. (LN 58 & 85)
+// For faster runtime, consider removing the thread output updates. (LN 54 & 80)
+
 #include <condition_variable>
 #include <cstdlib>
 #include <ctime>
