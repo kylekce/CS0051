@@ -1,8 +1,10 @@
 // sleep_for function has been disabled/commented out due to a long runtime. (LN 60 & 88)
 
+#include <condition_variable>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <mutex>
 #include <semaphore>
 #include <stack>
 #include <thread>
