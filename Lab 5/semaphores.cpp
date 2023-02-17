@@ -50,7 +50,7 @@ void producer(int id)
             cout << "Stack Full Producer Waiting " << this_thread::get_id() << endl;
         }
         cv.wait(lock, []()
-        { return buffer.size() <= maxStackSize; });
+                { return buffer.size() <= maxStackSize; });
 
         int n = rand() % range + 1;
         bufferCount += n;
@@ -79,7 +79,7 @@ void consumer(int id)
             cout << "Stack Empty Consumer Waiting " << this_thread::get_id() << endl;
         }
         cv.wait(lock, []()
-        { return !buffer.empty(); });
+                { return !buffer.empty(); });
 
         consumerCount++;
         cout << "Thread " << this_thread::get_id() << " Popped element: " << buffer.top() << endl;
