@@ -35,7 +35,7 @@ condition_variable cv;
 void producer(int id)
 {
     unique_lock<mutex> lock(m);
-    srand(time(NULL) + id); // use unique seed value for each thread
+    srand(time(nullptr) + id); // use unique seed value for each thread
 
     for (int i = 0; i < N; i++)
     {
@@ -46,7 +46,7 @@ void producer(int id)
             cout << "Stack Full Producer Waiting " << this_thread::get_id() << endl;
         }
         cv.wait(lock, []()
-                { return buffer.size() <= maxStackSize; });
+        { return buffer.size() <= maxStackSize; });
 
         int n = rand() % range + 1;
         bufferCount += n;
@@ -63,18 +63,18 @@ void producer(int id)
 void consumer(int id)
 {
     unique_lock<mutex> lock(m);
-    srand(time(NULL) + id); // use unique seed value for each thread
+    srand(time(nullptr) + id); // use unique seed value for each thread
 
     for (int i = 0; i < N; i++)
     {
         // wait if stack is empty
-        if (buffer.size() <= 0)
+        if (buffer.empty())
         {
             consumerWaitCount++;
             cout << "Stack Empty Consumer Waiting " << this_thread::get_id() << endl;
         }
         cv.wait(lock, []()
-                { return !buffer.empty(); });
+        { return !buffer.empty(); });
 
         consumerCount++;
         cout << "Thread " << this_thread::get_id() << " Popped element: " << buffer.top() << endl;
