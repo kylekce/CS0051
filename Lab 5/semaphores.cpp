@@ -1,11 +1,9 @@
-// sleep_for function has been disabled/commented out due to a long runtime. (LN 58 & 85)
-// For faster runtime, consider removing the thread output updates. (LN 54 & 80)
+// sleep_for function has been disabled/commented out due to a long runtime. (LN 60 & 88)
 
-#include <condition_variable>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <mutex>
+#include <semaphore>
 #include <stack>
 #include <thread>
 
@@ -31,9 +29,13 @@ int consumerCount;
 mutex m;
 condition_variable cv;
 
+// semaphore for producer and consumer
+binary_semaphore producerSem(1), consumerSem(1);
+
 // function to add element to stack
 void producer(int id)
 {
+    producerSem.acquire();
     unique_lock<mutex> lock(m);
     srand(time(nullptr) + id); // use unique seed value for each thread
 
@@ -62,6 +64,7 @@ void producer(int id)
 // function to remove element from stack
 void consumer(int id)
 {
+    consumerSem.acquire();
     unique_lock<mutex> lock(m);
     srand(time(nullptr) + id); // use unique seed value for each thread
 
@@ -96,9 +99,16 @@ int main()
 
     // wait for threads to finish
     producer1.join();
-    producer2.join();
+    consumerSem.release();
+
     consumer1.join();
+    producerSem.release();
+
+    producer2.join();
+    consumerSem.release();
+
     consumer2.join();
+    producerSem.release();
 
     // print the stats
     cout << "\nFinal Stats" << endl;
